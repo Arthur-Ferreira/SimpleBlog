@@ -1,14 +1,18 @@
 {
   "name": "blog",
-  "version": "1.0.0",
   "description": "",
+  "version": "1.0.0",
   "main": "app.js",
   "scripts": {
-    "start": "nodemon app.js"
+    "start": "nodemon"
   },
-  "keywords": [],
-  "author": "Arthur Ferreira",
-  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Arthur-Ferreira/SimpleBlog.git"
+  },
+  "keywords": ["Node.js", "Express", "MySQL", "EJS"],
+  "author": "Arthur Ferreira arthurfdarosa@gmail.coms",
+  "license": "ISC",
   "dependencies": {
     "ejs": "^3.1.6",
     "express": "^4.17.1",
