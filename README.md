@@ -6,7 +6,7 @@
 <h1 align="center">
     MyBlog
 </h1>
-<img src="public/images/layout.png" alt="My Blog Layout"/>
+<img src="frontend/public/images/layout.png" alt="My Blog Layout"/>
 
 <nav>
   <ul style="list-style:none;display:flex;justify-content:center;gap:40px;">
