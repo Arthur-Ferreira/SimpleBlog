@@ -1,0 +1,85 @@
+/* Base styles & resets */
+html {
+  font-family: "Roboto Slab", serif;
+  color: #312d2c;
+}
+
+body {
+  margin: 0;
+}
+
+main {
+  width: 80%;
+  margin: 3rem auto;
+}
+
+a {
+  text-decoration: none;
+  color: #754A35;
+}
+a:hover, a:active {
+  color: #EFE7DD;
+}
+
+ul,
+ol {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* Global components */
+.btn {
+  cursor: pointer;
+  font: inherit;
+  background-color: #754A35;
+  border: 1px solid #754A35;
+  color: white;
+  padding: 0.5rem 1.5rem;
+  border-radius: 4px;
+}
+.btn:hover, .btn:active {
+  background-color: #C88A36;
+  border-color: #C88A36;
+  color: white;
+}
+
+.btn.btn-alt {
+  background-color: transparent;
+  border-color: transparent;
+  color: #754A35;
+}
+.btn.btn-alt:hover, .btn.btn-alt:active {
+  color: #EFE7DD;
+}
+
+/* Site-wide content / elements */
+#main-header {
+  padding: 2rem 10%;
+  background-color: #754A35;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+#main-header ul {
+  display: flex;
+}
+#main-header li {
+  margin-left: 2rem;
+}
+#main-header nav a {
+  color: white;
+  font-size: 1.25rem;
+}
+#main-header nav a:hover, #main-header nav a:active {
+  color: #ffd900;
+}
+
+#logo a {
+  font-size: 2rem;
+  font-weight: bold;
+  color: white;
+  font-family: "Roboto", sans-serif;
+}
+
+/*# sourceMappingURL=base.css.map */
