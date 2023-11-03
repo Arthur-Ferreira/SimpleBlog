@@ -2,10 +2,10 @@
   "name": "blog",
   "description": "",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
-    "start": "nodemon"
-  },
+    "start": "nodemon",
+    "sass": "sass --watch ./frontend/public/sass/:./frontend/public/css/"  },
   "repository": {
     "type": "git",
     "url": "https://github.com/Arthur-Ferreira/SimpleBlog.git"
@@ -19,10 +19,11 @@
   "author": "Arthur Ferreira arthurfdarosa@gmail.coms",
   "license": "ISC",
   "dependencies": {
+    "dotenv": "^16.3.1",
     "ejs": "^3.1.6",
     "express": "^4.17.1",
     "mysql2": "^3.3.3",
-    "dotenv": "^16.3.1"
+    "sass": "^1.69.5"
   },
   "devDependencies": {
     "nodemon": "^2.0.7"

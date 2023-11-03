@@ -5,7 +5,7 @@ const db = require('../data/database');
 const router = express.Router();
 
 router.get('/', (req, res) => {
-  res.redirect('/posts')
+  res.redirect('/posts');
 });
 
 router.get('/posts', async (req, res) => {
@@ -27,13 +27,13 @@ router.post('/posts', async (req, res) => {
     req.body.content,
     req.body.author,
 
-  ]
+  ];
 
   await db.query('INSERT INTO blog.posts (title, summary, body, author_id) VALUES(?)', [
     data,
-  ])
+  ]);
 
-  res.redirect('/posts')
+  res.redirect('/posts');
 })
 
 
@@ -51,11 +51,12 @@ router.get('/posts/:id', async (req, res) => {
     SELECT posts.*, authors.name AS author_name, authors.email AS author_email FROM posts
     INNER JOIN authors ON posts.author_id = authors.id
     WHERE posts.post_id = ?
-  `
-  const [posts] = await db.query(query, [req.params.id])
+  `;
+
+  const [posts] = await db.query(query, [req.params.id]);
 
   if (!posts || posts.length === 0) {
-    return res.status(404).render('404')
+    return res.status(404).render('404');
   }
 
   const postData = {
@@ -69,22 +70,22 @@ router.get('/posts/:id', async (req, res) => {
     }),
   }
 
-  res.render('post-detail', { post: postData })
+  res.render('post-detail', { post: postData });
 
 })
 
 router.get('/posts/:id/edit', async (req, res) => {
   const query = `
     SELECT * FROM posts WHERE posts.post_id = ?
-  `
+  `;
 
-  const [posts] = await db.query(query, [req.params.id])
+  const [posts] = await db.query(query, [req.params.id]);
 
   if (!posts || posts.length === 0) {
-    return res.status(404).render('404')
+    return res.status(404).render('404');
   }
 
-  res.render('update-post', { post: posts[0] })
+  res.render('update-post', { post: posts[0] });
 })
 
 
@@ -92,29 +93,30 @@ router.post('/posts/:id/edit', async (req, res) => {
   const query = `
     UPDATE posts SET title = ?, summary = ?, body = ?
     WHERE post_id = ?
-  `
+  `;
 
   const [posts] = await db.query(query, [
-    req.params.title,
-    req.params.summary,
-    req.params.content,
+    req.body.title,
+    req.body.summary,
+    req.body.content,
     req.params.id
-  ])
+  ]);
 
   if (!posts || posts.length === 0) {
     return res.status(404).render('404')
-  }
+  };
 
-  res.redirect('/posts')
+  res.redirect('/posts');
 })
 
 router.post('/posts/:id/delete', async (req, res) => {
   const query = `
     DELETE FROM posts WHERE post_id = ?
-  `
-  const [posts] = await db.query(query, [req.params.id])
+  `;
 
-  res.redirect('/posts')
+  const [posts] = await db.query(query, [req.params.id]);
+
+  res.redirect('/posts');
 })
 
 
