@@ -26,8 +26,9 @@ O projeto construído é um Blog simples, onde podemos navegar, ver todas as pub
 
 
 Novas técnologias e funcionalidade:
-- Introdução do Sass, um Pré-Processador CSS que nos possibilita estilizar elementos HTML, com uma sintaxe e possibilidades diferentes do que usar o CSS puro;
-- Introdução do arquivo .env, um gerenciador de informações sensíveis para desenvolvedores.
+- 01/12/23 - Introdução do Padrão de Projetos MVC (Model, View, Controller), onde podemos dividir e visualizar melhor as responsabilidades dentro do Back-End.
+- 03/11/23 - Introdução do Sass, um Pré-Processador CSS que nos possibilita estilizar elementos HTML, com uma sintaxe e possibilidades diferentes do que usar o CSS puro;
+- 31/10/23 - Introdução do arquivo .env, um gerenciador de informações sensíveis para desenvolvedores.
 
 ## 🚀 Tecnologias
 
