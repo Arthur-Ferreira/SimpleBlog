@@ -1,5 +1,3 @@
-const db = require('../data/database');
-
 const Post = require('../models/post.model');
 
 async function getAllPosts(req, res) {
@@ -67,7 +65,7 @@ async function createNewPost(req, res) {
     body: req.body.content,
     author: req.body.author,
   };
-  
+
   const post = new Post(data.title, data.summary, data.body, data.author);
   try {
     await post.save();
@@ -80,13 +78,54 @@ async function createNewPost(req, res) {
 
 
 async function renderUpdatePostForm(req, res) {
+  try {
+    const postId = req.params.id;
 
+    if (!postId) {
+      return res.status(404).render('404', { error: 'Post ID not informed' });
+    }
+
+    const post = new Post(null, null, null, null, postId);
+    const result = await post.fetchSinglePost();
+
+    if (!result || result.length === 0) {
+      return res.status(404).render('404');
+    }
+
+    const postData = result[0];
+
+    res.render('update-post', { post: postData });
+  } catch (error) {
+    console.error(error);
+    res.status(500).render('500', { error: 'Internal Server Error' });
+  }
 }
 
 
-async function updatePost(req, res) {}
+async function updatePost(req, res) {
+  try {
+    const postId = req.params.id;
+    const data = {
+      id: postId,
+      title: req.body.title,
+      summary: req.body.summary,
+      body: req.body.content,
+      author: req.body.author,
+    };
 
+    if (!postId) {
+      return res.status(400).render('400', { error: 'Post ID not informed' });
+    }
 
+    const post = new Post(data.title, data.summary, data.body, data.author, data.id);
+
+    await post.update();
+    res.redirect('/posts');
+  } catch (error) {
+    console.error(error);
+    res.status(500).render('500', { error: 'Internal Server Error' });
+  }
+}
 
 
 async function deletePost(req, res) {
@@ -98,14 +137,13 @@ async function deletePost(req, res) {
 
     const post = new Post(null, null, null, null, postId);
     await post.delete();
-    
+
     res.redirect('/posts');
-  } catch(error) {
+  } catch (error) {
     console.error(error);
     res.status(500).render('500', { error: 'Internal Server Error' });
   }
 }
-
 
 
 module.exports = {

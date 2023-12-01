@@ -76,14 +76,40 @@ class Post {
     }
   }
   // Update a Post
+
+
+  async update() {
+    try {
+      if (!this.id) {
+        throw new Error('Undefined Post ID');
+      }
+
+      const query = `
+      UPDATE posts SET title = ?, summary = ?, body = ?
+      WHERE post_id = ?
+      `;
+
+      const [result] = await db.query(query, [this.title, this.summary, this.body, this.id]);
+
+      // Verifique se a atualização foi bem-sucedida ou se afetou linhas
+      if (result.affectedRows === 0) {
+        throw new Error('Post not found or not updated');
+      }
+
+    } catch (error) {
+      throw new Error(`Error on Post update: ${error.message}`);
+    }
+  }
+
+
   // Delete a Post
-  
+
   async delete() {
     try {
       if (!this.id) {
         throw new Error('Undefined Post ID');
       }
-      
+
       const query = `DELETE FROM posts WHERE post_id = ?`;
 
       const [result] = await db.query(query, [this.id]);
