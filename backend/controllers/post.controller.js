@@ -2,7 +2,6 @@ const db = require('../data/database');
 
 const Post = require('../models/post.model');
 
-
 async function getAllPosts(req, res) {
   try {
     const posts = await Post.fetchAllPosts();
@@ -18,7 +17,7 @@ async function getSinglePost(req, res) {
   try {
     const postId = req.params.id;
     if (!postId) {
-      return res.status(400).render('400', { error: 'ID do post não fornecido' });
+      return res.status(400).render('400', { error: 'Post ID not informed' });
     }
 
     const post = new Post(null, null, null, null, postId);
@@ -68,7 +67,7 @@ async function createNewPost(req, res) {
     body: req.body.content,
     author: req.body.author,
   };
-
+  
   const post = new Post(data.title, data.summary, data.body, data.author);
   try {
     await post.save();
@@ -80,8 +79,32 @@ async function createNewPost(req, res) {
 }
 
 
+async function renderUpdatePostForm(req, res) {
+
+}
 
 
+async function updatePost(req, res) {}
+
+
+
+
+async function deletePost(req, res) {
+  try {
+    const postId = req.params.id;
+    if (!postId) {
+      return res.status(400).render('400', { error: 'Post ID not informed' });
+    }
+
+    const post = new Post(null, null, null, null, postId);
+    await post.delete();
+    
+    res.redirect('/posts');
+  } catch(error) {
+    console.error(error);
+    res.status(500).render('500', { error: 'Internal Server Error' });
+  }
+}
 
 
 
@@ -90,4 +113,7 @@ module.exports = {
   getSinglePost: getSinglePost,
   renderNewPostForm: renderNewPostForm,
   createNewPost: createNewPost,
+  renderUpdatePostForm: renderUpdatePostForm,
+  updatePost: updatePost,
+  deletePost: deletePost,
 }

@@ -1,9 +1,8 @@
 const express = require('express');
+const router = express.Router();
 
-const db = require('../data/database');
 const postController = require('../controllers/post.controller');
 
-const router = express.Router();
 
 router.get('/', (req, res) => {
   res.redirect('/posts');
@@ -17,11 +16,11 @@ router.get('/new-post', postController.renderNewPostForm);
 
 router.get('/posts/:id', postController.getSinglePost);
 
-router.get('/posts/:id/edit', async (req, res) => { });
+router.get('/posts/:id/edit', postController.renderUpdatePostForm);
 
-router.post('/posts/:id/edit', async (req, res) => { });
+router.post('/posts/:id/edit', postController.updatePost);
 
-router.post('/posts/:id/delete', async (req, res) => { });
+router.post('/posts/:id/delete', postController.deletePost);
 
 
 module.exports = router
