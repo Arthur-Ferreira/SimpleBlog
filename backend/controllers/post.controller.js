@@ -2,115 +2,92 @@ const db = require('../data/database');
 
 const Post = require('../models/post.model');
 
-const express = require('express');
-const router = express.Router();
-
 
 async function getAllPosts(req, res) {
-  let posts;
   try {
-    posts = await Post.fetchAllPosts();
+    const posts = await Post.fetchAllPosts();
+    res.render('posts-list', { posts });
   } catch (error) {
-    console.log(error);
+    console.error(error);
+    res.status(500).render('500', { error: 'Internal Server Error' });
   }
-  res.render('posts-list', { posts: posts });
 }
 
+
 async function getSinglePost(req, res) {
-  const reqId = req.params.id;
-  const post = new Post;
-
-  let result;
-
   try {
-    result = post.fetchSinglePost(reqId);
-  } catch (error) {
-    console.log(error);
+    const postId = req.params.id;
+    if (!postId) {
+      return res.status(400).render('400', { error: 'ID do post não fornecido' });
+    }
+
+    const post = new Post(null, null, null, null, postId);
+    const result = await post.fetchSinglePost();
+
     if (!result || result.length === 0) {
       return res.status(404).render('404');
     }
+
+    const postData = {
+      title: result[0].title,
+      author_name: result[0].author_name,
+      summary: result[0].summary,
+      body: result[0].body,
+      date: result[0].date.toISOString(),
+      humanReadableDate: result[0].date.toLocaleDateString('en-US', {
+        weekday: 'long',
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+      }),
+    };
+
+    res.render('post-detail', { post: postData });
+  } catch (error) {
+    console.error(error);
+    res.status(500).render('500', { error: 'Internal Server Error' });
   }
-
-
-  const postData = {
-    ...result[0],
-    date: result[0].date.toISOString(),
-    humanReadableDate: result[0].date.toLocaleDateString('en-US', {
-      weekday: 'long',
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric'
-    }),
-  }
-
-  res.render('post-detail', { result: postData });
 }
+
+
+async function renderNewPostForm(req, res) {
+  try {
+    const authors = await Post.fetchAllAuthors();
+    res.render('create-post', { authors: authors });
+  } catch (error) {
+    console.error(error);
+    res.status(500).render('500', { error: 'Internal Server Error' });
+  }
+}
+
 
 async function createNewPost(req, res) {
-  const data = [
-    req.body.title,
-    req.body.summary,
-    req.body.content,
-    req.body.author,
-
-  ];
-
-  await db.query(query, [data,]);
-
-  res.redirect('/posts');
-}
-
-
-async function getSingleAuthor(req, res) {
-  const [authors] = await db.query('SELECT * FROM authors');
-
-  res.render('create-post', { authors: authors });
-
-}
-
-
-async function selectSinglePost(req, res) {
-  const [posts] = await db.query(query, [req.params.id]);
-
-  if (!posts || posts.length === 0) {
-    return res.status(404).render('404');
-  }
-
-  res.render('update-post', { post: posts[0] });
-}
-
-
-async function editPost(req, res) {
-
-  const [posts] = await db.query(query, [
-    req.body.title,
-    req.body.summary,
-    req.body.content,
-    req.params.id
-  ]);
-
-  if (!posts || posts.length === 0) {
-    return res.status(404).render('404')
+  const data = {
+    title: req.body.title,
+    summary: req.body.summary,
+    body: req.body.content,
+    author: req.body.author,
   };
 
-  res.redirect('/posts');
+  const post = new Post(data.title, data.summary, data.body, data.author);
+  try {
+    await post.save();
+    res.redirect('/posts');
+  } catch (error) {
+    console.error(error);
+    res.status(500).render('500', { error: 'Internal Server Error' });
+  }
 }
 
 
-async function deletePost(req, res) {
 
-  const [posts] = await db.query(query, [req.params.id]);
 
-  res.redirect('/posts');
-}
+
 
 
 module.exports = {
   getAllPosts: getAllPosts,
   getSinglePost: getSinglePost,
+  renderNewPostForm: renderNewPostForm,
   createNewPost: createNewPost,
-  getSingleAuthor: getSingleAuthor,
-  selectSinglePost: selectSinglePost,
-  editPost: editPost,
-  deletePost: deletePost
 }

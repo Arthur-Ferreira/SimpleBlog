@@ -1,60 +1,87 @@
 const db = require('../data/database');
 
 class Post {
-  constructor(id, title, summary, author) {
-    title = this.title,
-      summary = this.summary,
-      author = this.author,
-      id = this.id
+  constructor(title, summary, body, author, id) {
+    this.title = title;
+    this.summary = summary;
+    this.body = body;
+    this.author = author;
+
+    if (id) {
+      this.id = id;
+    }
   }
 
-  // Fetch all Posts
   static async fetchAllPosts() {
-    const query = `
-    SELECT posts.*, authors.name AS author_name FROM posts 
-    INNER JOIN authors ON posts.author_id = authors.id
-    `;
+    try {
+      const query = `
+        SELECT posts.*, authors.name AS author_name FROM posts
+        INNER JOIN authors ON posts.author_id = authors.id
+      `;
 
-    const [posts] = await db.query(query);
-    
-    return posts;
+      const [posts,] = await db.query(query);
+      return posts;
+    } catch (error) {
+      throw new Error(`Posts error on look up: ${error.message}`);
+    }
   }
-  
-  // Fetch single Post
-  
+
   async fetchSinglePost() {
-    const query = `
-    SELECT posts.*, authors.name AS author_name, authors.email AS author_email FROM posts
-    INNER JOIN authors ON posts.author_id = authors.id
-    WHERE posts.post_id = ?
-    `;
-    
-    const postId = this.id;
-    
+    try {
+      if (!this.id) {
+        throw new Error('ID do post não definido');
+      }
 
-    const [post] = await db.query(query, );
-    
-    return post;
+      const query = `
+        SELECT posts.*, authors.name AS author_name, authors.email AS author_email FROM posts
+        INNER JOIN authors ON posts.author_id = authors.id
+        WHERE posts.post_id = ?
+      `;
+
+      const [post] = await db.query(query, [this.id]);
+
+      if (post.length > 0) {
+        this.title = post[0].title;
+        this.summary = post[0].summary;
+        this.body = post[0].body;
+      }
+
+      return post;
+    } catch (error) {
+      throw new Error(`Erro ao buscar post: ${error.message}`);
+    }
   }
 
+  static async fetchAllAuthors() {
+    try {
+      const query = `SELECT * FROM authors`;
+      const [authors,] = await db.query(query);
+      return authors;
+    } catch (error) {
+      throw new Error(`Authors error on look up: ${error.message}`);
+    }
+  }
 
-  // Save a new Post
-
-
-  // Update a Post
-
-
-  // Delete a Post
-
-
+  async save() {
+    try {
+      const query = `
+          INSERT INTO posts (title, summary, body, author_id) 
+          VALUES (?, ?, ?, ?)
+        `;
+      const values = [this.title, this.summary, this.body, this.author];
+      const result = await db.query(query, values);
+      this.id = result.insertId;
+    } catch (error) {
+      throw new Error(`Erro ao salvar post: ${error.message}`);
+    }
+  }
 }
-
-
-
 
 module.exports = Post;
 
 
+// Update a Post
+// Delete a Post
 
 
 
@@ -88,106 +115,107 @@ module.exports = Post;
 
 
 
-async function getAllPosts(req, res) {
 
-  res.render('posts-list', { posts: posts });
-}
+// async function getAllPosts(req, res) {
 
-async function getSinglePost(req, res) {
-  const query = `
-    SELECT posts.*, authors.name AS author_name, authors.email AS author_email FROM posts
-    INNER JOIN authors ON posts.author_id = authors.id
-    WHERE posts.post_id = ?
-  `;
+//   res.render('posts-list', { posts: posts });
+// }
 
-  const [posts] = await db.query(query, [req.params.id]);
+// async function getSinglePost(req, res) {
+//   const query = `
+//     SELECT posts.*, authors.name AS author_name, authors.email AS author_email FROM posts
+//     INNER JOIN authors ON posts.author_id = authors.id
+//     WHERE posts.post_id = ?
+//   `;
 
-  if (!posts || posts.length === 0) {
-    return res.status(404).render('404');
-  }
+//   const [posts] = await db.query(query, [req.params.id]);
 
-  const postData = {
-    ...posts[0],
-    date: posts[0].date.toISOString(),
-    humanReadableDate: posts[0].date.toLocaleDateString('en-US', {
-      weekday: 'long',
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric'
-    }),
-  }
+//   if (!posts || posts.length === 0) {
+//     return res.status(404).render('404');
+//   }
 
-  res.render('post-detail', { post: postData });
-}
+//   const postData = {
+//     ...posts[0],
+//     date: posts[0].date.toISOString(),
+//     humanReadableDate: posts[0].date.toLocaleDateString('en-US', {
+//       weekday: 'long',
+//       year: 'numeric',
+//       month: 'long',
+//       day: 'numeric'
+//     }),
+//   }
 
-async function createNewPost(req, res) {
-  const data = [
-    req.body.title,
-    req.body.summary,
-    req.body.content,
-    req.body.author,
+//   res.render('post-detail', { post: postData });
+// }
 
-  ];
+// async function createNewPost(req, res) {
+//   const data = [
+//     req.body.title,
+//     req.body.summary,
+//     req.body.content,
+//     req.body.author,
 
-  await db.query('INSERT INTO blog.posts (title, summary, body, author_id) VALUES(?)', [
-    data,
-  ]);
+//   ];
 
-  res.redirect('/posts');
-}
+//   await db.query('INSERT INTO blog.posts (title, summary, body, author_id) VALUES(?)', [
+//     data,
+//   ]);
 
-
-async function getSingleAuthor(req, res) {
-  const [authors] = await db.query('SELECT * FROM authors');
-
-  res.render('create-post', { authors: authors });
-
-}
+//   res.redirect('/posts');
+// }
 
 
-async function selectSinglePost(req, res) {
-  const query = `
-    SELECT * FROM posts WHERE posts.post_id = ?
-  `;
+// async function getSingleAuthor(req, res) {
+//   const [authors] = await db.query('SELECT * FROM authors');
 
-  const [posts] = await db.query(query, [req.params.id]);
+//   res.render('create-post', { authors: authors });
 
-  if (!posts || posts.length === 0) {
-    return res.status(404).render('404');
-  }
-
-  res.render('update-post', { post: posts[0] });
-}
+// }
 
 
-async function editPost(req, res) {
-  const query = `
-    UPDATE posts SET title = ?, summary = ?, body = ?
-    WHERE post_id = ?
-  `;
+// async function selectSinglePost(req, res) {
+//   const query = `
+//     SELECT * FROM posts WHERE posts.post_id = ?
+//   `;
 
-  const [posts] = await db.query(query, [
-    req.body.title,
-    req.body.summary,
-    req.body.content,
-    req.params.id
-  ]);
+//   const [posts] = await db.query(query, [req.params.id]);
 
-  if (!posts || posts.length === 0) {
-    return res.status(404).render('404')
-  };
+//   if (!posts || posts.length === 0) {
+//     return res.status(404).render('404');
+//   }
 
-  res.redirect('/posts');
-}
+//   res.render('update-post', { post: posts[0] });
+// }
 
 
-async function deletePost(req, res) {
-  const query = `
-    DELETE FROM posts WHERE post_id = ?
-  `;
+// async function editPost(req, res) {
+//   const query = `
+//     UPDATE posts SET title = ?, summary = ?, body = ?
+//     WHERE post_id = ?
+//   `;
 
-  const [posts] = await db.query(query, [req.params.id]);
+//   const [posts] = await db.query(query, [
+//     req.body.title,
+//     req.body.summary,
+//     req.body.content,
+//     req.params.id
+//   ]);
 
-  res.redirect('/posts');
-}
+//   if (!posts || posts.length === 0) {
+//     return res.status(404).render('404')
+//   };
+
+//   res.redirect('/posts');
+// }
+
+
+// async function deletePost(req, res) {
+//   const query = `
+//     DELETE FROM posts WHERE post_id = ?
+//   `;
+
+//   const [posts] = await db.query(query, [req.params.id]);
+
+//   res.redirect('/posts');
+// }
 
