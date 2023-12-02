@@ -5,7 +5,9 @@
   "main": "app.js",
   "scripts": {
     "start": "nodemon",
-    "sass": "sass --watch ./frontend/public/sass/:./frontend/public/css/"  },
+    "sass": "sass --watch ./frontend/public/sass/:./frontend/public/css/",
+    "doc": "jsdoc -c jsdoc.json"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/Arthur-Ferreira/SimpleBlog.git"
@@ -26,6 +28,7 @@
     "sass": "^1.69.5"
   },
   "devDependencies": {
+    "jsdoc": "^4.0.2",
     "nodemon": "^2.0.7"
   }
 }

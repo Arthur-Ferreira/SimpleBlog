@@ -1,8 +1,3 @@
-<!-- // TODO: Guest users can search for many places
-// TODO: Companys can signup to collect items
-  // TODO: Authentication
-  // TODO: Siignin and signout -->
-
 <h1 align="center">
     MyBlog
 </h1>
@@ -11,16 +6,18 @@
 <nav>
   <ul style="list-style:none;display:flex;justify-content:center;gap:40px;">
     <li>
-      <a href="#-projeto">Projeto</a>
+      <a href="#projeto">Projeto</a>
     </li>
     <li>
-      <a href="#rocket-tecnologias">Tecnologias</a>
+      <a href="#tecnologias">Tecnologias</a>
+    </li>
+    <li>
+      <a href="#estrutura">Estrutura</a>
     </li>
   </ul>
 </nav>
 
-## 💻 Projeto
-
+<h2 id="projeto">💻 Projeto</h2>
 
 O projeto construído é um Blog simples, onde podemos navegar, ver todas as publicações, criar novas, editar e excluí-las, desta forma teremos um CRUD (Create, Read, Update, Delete) completo.
 
@@ -30,7 +27,7 @@ Novas técnologias e funcionalidade:
 - 03/11/23 - Introdução do Sass, um Pré-Processador CSS que nos possibilita estilizar elementos HTML, com uma sintaxe e possibilidades diferentes do que usar o CSS puro;
 - 31/10/23 - Introdução do arquivo .env, um gerenciador de informações sensíveis para desenvolvedores.
 
-## 🚀 Tecnologias
+<h2 id="tecnologias">🚀 Tecnologias</h2>
 
 Esse projeto foi desenvolvido com as seguintes tecnologias:
 
@@ -40,3 +37,40 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
 - [EJS](https://ejs.co/)
 - [SASS](https://sass-lang.com/)
 - [.ENV](https://www.dotenv.org/)
+
+
+<h2 id="estrutura">🗃 Estrutura do Projeto</h2>
+
+```
+- backend
+  - controllers
+    - post.controller.js
+  - data
+    -database.js
+  - models
+    - post.model.js
+  - routes
+    - blog.js
+  - data
+    - database.js
+  - views
+    - includes
+      - head.ejs
+      - header.ejs
+      - post-item.ejs
+    - 404.ejs
+    - 500.ejs
+    - create-post.ejs
+    - post-detail.ejs
+    - post-list.ejs
+    - update-post.ejs
+- frontend
+  - public
+    - sass
+    - images
+- app.js
+- package.json
+- README.md
+- .gitignore
+- .env.example
+```

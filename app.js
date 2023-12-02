@@ -1,23 +1,24 @@
+// Line used to load the .env variables
 require('dotenv').config();
+const port = process.env.PORT;
 
 const path = require('path');
-
 const express = require('express');
 
 const blogRoutes = require('./backend/routes/blog');
 
+
 const app = express();
 
-const port = process.env.PORT;
 
-// Activate EJS view engine
-app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname + '/frontend', 'views'));
+
+app.set('view engine', 'ejs'); // Activate EJS view engine
+app.set('views', path.join(__dirname + '/backend', 'views')); // Setting up Views Default path
 
 app.use(express.urlencoded({ extended: true })); // Parse incoming request bodies
 app.use(express.static(path.join(__dirname + '/frontend', 'public'))); // Serve static files (e.g. CSS files)
 
-app.use(blogRoutes);
+app.use(blogRoutes); // Routes beeing used on the app
 
 app.use(function (error, req, res, next) {
   // Default error handling function
