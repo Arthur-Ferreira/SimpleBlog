@@ -23,6 +23,7 @@ O projeto construído é um Blog simples, onde podemos navegar, ver todas as pub
 
 
 Novas técnologias e funcionalidade:
+- 02/12/23 - Introdução do JSDoc, uma API geradora de documentações para JavaScript.
 - 01/12/23 - Introdução do Padrão de Projetos MVC (Model, View, Controller), onde podemos dividir e visualizar melhor as responsabilidades dentro do Back-End.
 - 03/11/23 - Introdução do Sass, um Pré-Processador CSS que nos possibilita estilizar elementos HTML, com uma sintaxe e possibilidades diferentes do que usar o CSS puro;
 - 31/10/23 - Introdução do arquivo .env, um gerenciador de informações sensíveis para desenvolvedores.
@@ -37,6 +38,7 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
 - [EJS](https://ejs.co/)
 - [SASS](https://sass-lang.com/)
 - [.ENV](https://www.dotenv.org/)
+- [JSDoc](https://jsdoc.app/)
 
 
 <h2 id="estrutura">🗃 Estrutura do Projeto</h2>
@@ -69,6 +71,7 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
     - sass
     - images
 - app.js
+- jsdoc.json
 - package.json
 - README.md
 - .gitignore
