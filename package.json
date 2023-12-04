@@ -6,7 +6,9 @@
   "scripts": {
     "start": "nodemon",
     "sass": "sass --watch ./frontend/public/sass/:./frontend/public/css/",
-    "doc": "jsdoc -c jsdoc.json"
+    "doc": "jsdoc -c jsdoc.json",
+    "test": "jest",
+    "test:watch": "jest --watch"
   },
   "repository": {
     "type": "git",
@@ -28,6 +30,7 @@
     "sass": "^1.69.5"
   },
   "devDependencies": {
+    "jest": "^29.7.0",
     "jsdoc": "^4.0.2",
     "nodemon": "^2.0.7"
   }
