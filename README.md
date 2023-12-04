@@ -46,6 +46,7 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
 - [.ENV](https://www.dotenv.org/)
 - [JSDoc](https://jsdoc.app/)
 
+
 <h2 id="estrutura">🗃 Estrutura do Projeto</h2>
 
 ```

@@ -4,7 +4,8 @@
   "version": "1.0.0",
   "main": "app.js",
   "scripts": {
-    "start": "nodemon",
+    "start": "node",
+    "dev": "nodemon",
     "sass": "sass --watch ./frontend/public/sass/:./frontend/public/css/",
     "doc": "jsdoc -c jsdoc.json"
   },
