@@ -1,15 +1,13 @@
-// Line used to load the .env variables
-require('dotenv').config();
-const port = process.env.PORT;
+require('dotenv').config()
 
 const path = require('path');
 const express = require('express');
 
-const blogRoutes = require('./backend/routes/blog');
+const blogRoutes = require('./routes/blog');
 
+const port = process.env.PORT;
 
 const app = express();
-
 
 
 app.set('view engine', 'ejs'); // Activate EJS view engine
