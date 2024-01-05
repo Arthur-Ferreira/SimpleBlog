@@ -1,4 +1,4 @@
-function Error500() {
+function Error() {
   return (
     <main>
       <h1>Oops, something went wrong!</h1>
@@ -13,4 +13,4 @@ function Error500() {
   );
 }
 
-export default Error500;
+export default Error;

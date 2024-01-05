@@ -1,0 +1,14 @@
+{
+  "presets": [
+    [
+      "@babel/preset-react",
+      {
+        "throwIfNamespace": false, // defaults to true
+        "runtime": "classic" // defaults to classic
+      }
+    ]
+  ],
+  "targets": {
+    "esmodules": true
+  }
+}

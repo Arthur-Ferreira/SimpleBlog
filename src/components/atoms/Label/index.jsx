@@ -1,6 +1,6 @@
-function AppLabel() {
+function AppLabel({forAttribute, children}) {
   return (
-    <label htmlFor="{title}">{label}</label>
+    <label htmlFor={forAttribute}>{children}</label>
   );
 }
 

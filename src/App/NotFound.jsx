@@ -1,4 +1,4 @@
-function Error404() {
+function NotFound() {
   return (
     <main>
       <h1>We could not find this resource!</h1>
@@ -11,4 +11,4 @@ function Error404() {
 }
 
 
-export default Error404;
+export default NotFound;

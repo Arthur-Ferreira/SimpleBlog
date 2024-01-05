@@ -1,3 +1,8 @@
+import AppButton from "../components/atoms/Button";
+
+import "../css/forms.css";
+
+
 function CreatePost() {
   return (
     <main>
@@ -23,7 +28,9 @@ function CreatePost() {
             <% } %> */}
         </select>
       </div>
-      <button class="btn">Add Post</button>
+      <AppButton>
+        Add Post
+        </AppButton>
     </form>
   </main>
   );

@@ -1,6 +1,6 @@
-function AppButton() {
+function AppButton({children}) {
   return (
-    <button className="btn">{label}</button>
+    <button className="btn">{children}</button>
   );
 }
 

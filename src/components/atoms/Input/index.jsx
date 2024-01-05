@@ -1,7 +1,5 @@
-function AppInput() {
-  return (
-    <input type="text" id="{title}" value="" name="{title}" required />
-  );
+function AppInput({ type, id, value, name }) {
+  return <input type={type} id={id} value={value} name={name} required />;
 }
 
 export default AppInput;
