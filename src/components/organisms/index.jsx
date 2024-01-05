@@ -1,0 +1,21 @@
+function Header() {
+  return (
+    <header id="main-header">
+      <div id="logo">
+        <a href="/">MyBlog</a>
+      </div>
+      <nav>
+        <ul>
+          <li>
+            <a href="/posts">All Posts</a>
+          </li>
+          <li>
+            <a href="/new-post">Create Post</a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+  );
+}
+
+export default Header;
