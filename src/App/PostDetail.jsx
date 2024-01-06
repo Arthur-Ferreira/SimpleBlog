@@ -1,7 +1,12 @@
+import { useParams } from "react-router-dom";
+
 function PostDetail() {
+  const params = useParams();
+  
   return (
     <main id="post-detail">
       <h1>
+        {params.id}
         {/* <%= post.title %> */}
       </h1>
       <section id="post-meta">

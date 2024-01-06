@@ -4,7 +4,7 @@ function PostList() {
       <h1>All Posts</h1>
       {/* <% if(!posts || posts.length === 0) {%> */}
       <p>No posts found - maybe start creating one?</p>
-      <a class="btn" href="/new-post">
+      <a className="btn" href="/new-post">
         Create a new post
       </a>
       {/* <% } else { %> */}

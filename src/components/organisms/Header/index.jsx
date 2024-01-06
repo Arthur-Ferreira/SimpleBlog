@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 
 function Header() {
   return (
@@ -9,10 +9,12 @@ function Header() {
       <nav>
         <ul>
           <li>
-            <Link to="/posts">All Posts</Link>
+            <NavLink to="/posts" end>
+              All Posts
+            </NavLink>
           </li>
           <li>
-            <Link to="/new-post">Create Post</Link>
+            <NavLink to="/new-post">Create Post</NavLink>
           </li>
         </ul>
       </nav>

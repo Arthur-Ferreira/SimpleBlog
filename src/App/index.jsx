@@ -1,34 +1,31 @@
-import {
-  createRoutesFromElements,
-  Route,
-  createBrowserRouter,
-  RouterProvider,
-} from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
-import Header from "../components/organisms/Header";
-import CreatePost from "./CreatePost";
-import PostList from "./PostList";
+import RootLayout from "./Root";
 import Error from "./Error";
+import PostList from "./PostList";
+import CreatePost from "./CreatePost";
+import PostDetail from "./PostDetail";
+import UpdatePost from "./UpdatePost";
 
 import "../css/base.css";
 
-const routerDefinitions = createRoutesFromElements(
-  <Route>
-    <Route path="/" element={<PostList />} errorElement={<Error />} />
-    <Route path="/posts" element={<PostList />} />
-    <Route path="/new-post" element={<CreatePost />} />
-  </Route>
-);
-
-const router = createBrowserRouter(routerDefinitions);
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <RootLayout />,
+    errorElement: <Error />,
+    children: [
+      { index: true, element: <PostList /> },
+      { path: "posts", element: <PostList /> },
+      { path: "posts/:id", element: <PostDetail /> },
+      { path: "new-post", element: <CreatePost /> },
+      { path: "posts/:id/edit", element: <UpdatePost /> },
+    ],
+  },
+]);
 
 function App() {
-  return (
-    <>
-      <Header />
-      <RouterProvider router={router} />
-    </>
-  );
+  return <RouterProvider router={router} />;
 }
 
 export default App;

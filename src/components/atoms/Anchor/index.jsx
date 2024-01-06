@@ -1,6 +1,8 @@
-function Anchor() {
+import { Link } from "react-router-dom";
+
+function Anchor({children}) {
   return (
-    <a className="btn" href="/new-post">{label}</a>
+    <Link className="btn" to="/new-post">{children}</Link>
   );
 }
 

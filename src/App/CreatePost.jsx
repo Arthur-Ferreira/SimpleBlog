@@ -1,40 +1,57 @@
+import { useNavigate } from "react-router-dom";
 import AppButton from "../components/atoms/Button";
+import AppLabel from "../components/atoms/Label";
+import AppInput from "../components/atoms/Input";
+import AppTextArea from "../components/atoms/TextArea";
 
 import "../css/forms.css";
 
-
 function CreatePost() {
+  const navigagte = useNavigate();
+
+  function navigateHandler() {
+    navigagte("/");
+  }
+
   return (
     <main>
-    <h1>Add a new post</h1>
-    <form action="/posts" method="POST">
-      <div class="form-control">
-        <label for="title">Title</label>
-        <input type="text" id="title" name="title" required />
-      </div>
-      <div class="form-control">
-        <label for="summary">Summary</label>
-        <input type="text" id="summary" name="summary" required maxlength="255" />
-      </div>
-      <div class="form-control">
-        <label for="content">Post Content</label>
-        <textarea id="content" name="content" required rows="5"></textarea>
-      </div>
-      <div class="form-control">
-        <label for="author">Select Author</label>
-        <select id="author" name="author">
-          {/* <% for(const author of authors) { %>
+      <h1>Add a new post</h1>
+      <form action="/posts" method="POST">
+        <div className="form-control">
+          <AppLabel htmlFor="title">Title</AppLabel>
+          <AppInput type="text" id="title" name="title" required />
+        </div>
+        <div className="form-control">
+          <AppLabel htmlFor="summary">Summary</AppLabel>
+          <AppInput
+            type="text"
+            id="summary"
+            name="summary"
+            maxLength="255"
+            required
+          />
+        </div>
+        <div className="form-control">
+          <AppLabel htmlFor="content">Post Content</AppLabel>
+          <AppTextArea
+            id="content"
+            name="content"
+            required
+            rows="5"
+          ></AppTextArea>
+        </div>
+        <div className="form-control">
+          <AppLabel htmlFor="author">Select Author</AppLabel>
+          <select id="author" name="author">
+            {/* <% for(const author of authors) { %>
             <option value="<%= author.id %>"><%= author.name %></option>
             <% } %> */}
-        </select>
-      </div>
-      <AppButton>
-        Add Post
-        </AppButton>
-    </form>
-  </main>
+          </select>
+        </div>
+        <AppButton onClick={navigateHandler}>Add Post</AppButton>
+      </form>
+    </main>
   );
 }
-
 
 export default CreatePost;

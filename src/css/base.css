@@ -3,6 +3,10 @@ html {
   font-family: "Roboto Slab", serif;
   color: #312d2c;
 }
+ 
+* {
+  font-family: sans-serif;
+}
 
 body {
   margin: 0;

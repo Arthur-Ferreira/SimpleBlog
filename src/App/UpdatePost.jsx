@@ -31,8 +31,8 @@ function UpdatePost() {
             id="summary"
             value="summary"
             name="summary"
+            maxLength="255"
             required
-            // maxlength="255"
           />
         </div>
         <div className="form-control">
