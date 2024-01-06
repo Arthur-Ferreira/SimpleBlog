@@ -2,7 +2,7 @@ import { Outlet } from "react-router-dom";
 
 import Header from "../components/organisms/Header";
 
-function RootLayout() {
+function Root() {
   return (
     <>
       <Header />
@@ -10,4 +10,4 @@ function RootLayout() {
     </>
   );
 }
-export default RootLayout;
+export default Root;

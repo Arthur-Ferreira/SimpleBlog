@@ -1,16 +1,19 @@
 import { Link } from "react-router-dom";
-function PostItem() {
+
+import '../../css/posts.css'
+
+function PostItem({item}) {
   return (
-    <article class="post-item">
-      <h2>{/* <%= post.title %> */}</h2>
-      <p class="post-item-author">{/* By <%= post.author_name %> */}</p>
-      <p>{/* <%= post.summary %> */}</p>
-      <div class="post-actions">
+    <article className="post-item">
+      <h2>{item.title}</h2>
+      <p className="post-item-author">{item.author_name}</p>
+      <p>{item.summary}</p>
+      <div className="post-actions">
         <form action="/posts/<%= post.post_id %>/delete" method="POST">
-          <button class="btn btn-alt">Delete Post</button>
+          <button className="btn btn-alt">Delete Post</button>
         </form>
-        <Link to="/posts/<%= post.post_id %>/edit">Edit Post</Link>
-        <Link className="btn" to={"/posts/<%= post.post_id %>"}>
+        <Link to={`${item.post_id}/edit`}>Edit Post</Link>
+        <Link className="btn" to={`${item.post_id}`}>
           View Post
         </Link>
       </div>

@@ -1,21 +1,44 @@
+import { Link, json, useLoaderData } from "react-router-dom";
+import PostItem from "../components/molecules/post-item";
+
 function PostList() {
+  const data = useLoaderData();
+  const posts = data.posts;
+
   return (
     <main id="all-posts">
       <h1>All Posts</h1>
-      {/* <% if(!posts || posts.length === 0) {%> */}
-      <p>No posts found - maybe start creating one?</p>
-      <a className="btn" href="/new-post">
-        Create a new post
-      </a>
-      {/* <% } else { %> */}
-      <ol id="posts-list">
-        {/* <% for (const post of posts) { %> */}
-        <li>{/* <%- include('includes/post-item', { post: post }) %> */}</li>
-        {/* <% } %> */}
-      </ol>
-      {/* <% } %> */}
+      {!posts || posts.length === 0 ? (
+        <>
+          <p>No posts found - maybe start creating one?</p>
+          <Link className="btn" to="/new-post">
+            Create a new post
+          </Link>
+        </>
+      ) : (
+        <ol id="posts-list">
+          {posts.map((post) => (
+            <li key={post.post_id}>
+              <PostItem item={post} />
+            </li>
+          ))}
+        </ol>
+      )}
     </main>
   );
 }
 
 export default PostList;
+
+export async function loader() {
+  const response = await fetch("http://localhost:8080/api/posts");
+
+  if (!response.ok) {
+    throw json(
+      { message: "Error on fetching all Posts." }, 
+      { status: 500 }
+    );
+  } else { 
+    return response;
+  }
+}
