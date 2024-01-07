@@ -4,8 +4,8 @@ import Root from "./Root";
 import RootLayout from "./RootLayout";
 import Error from "./Error";
 import PostList, { loader as postsLoader } from "./PostList";
-import CreatePost from "./CreatePost";
-import PostDetail from "./PostDetail";
+import CreatePost, { loader as authorsLoader } from "./CreatePost";
+import PostDetail, { loader as postDetailsLoader } from "./PostDetail";
 import UpdatePost from "./UpdatePost";
 
 import "../css/base.css";
@@ -22,9 +22,16 @@ const router = createBrowserRouter([
         element: <PostList />,
         loader: postsLoader,
       },
-      { path: "posts/:id", element: <PostDetail /> },
-      { path: "new-post", element: <CreatePost /> },
-      { path: "posts/:id/edit", element: <UpdatePost /> },
+      {
+        path: "posts/:id",
+        id: "post",
+        loader: postDetailsLoader,
+        children: [
+          { index: true, element: <PostDetail /> },
+          { path: ":id/edit", element: <UpdatePost /> },
+        ],
+      },
+      { path: "new-post", element: <CreatePost />, loader: authorsLoader },
     ],
   },
 ]);

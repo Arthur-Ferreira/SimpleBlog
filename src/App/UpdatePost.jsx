@@ -4,8 +4,12 @@ import AppButton from "../components/atoms/Button";
 
 import "../css/forms.css";
 import AppTextArea from "../components/atoms/TextArea";
+import { useRouteLoaderData } from "react-router-dom";
 
 function UpdatePost() {
+  const data = useRouteLoaderData('post');
+  const post = data.post;
+
   return (
     <main>
       <h1>Update post</h1>
@@ -17,7 +21,7 @@ function UpdatePost() {
           <AppInput
             type="text"
             id="title"
-            value="title"
+            defaultValue={post ? post.title : ''}
             name="title"
             required
           />
@@ -29,7 +33,7 @@ function UpdatePost() {
           <AppInput
             type="text"
             id="summary"
-            value="summary"
+            defaultValue={post ? post.summary : ''}
             name="summary"
             maxLength="255"
             required
@@ -40,7 +44,7 @@ function UpdatePost() {
             Post Content
           </AppLabel>
           <AppTextArea id="content" name="content" required rows="5">
-            Body
+          {post ? post.content : ''}
           </AppTextArea>
         </div>
         <AppButton>

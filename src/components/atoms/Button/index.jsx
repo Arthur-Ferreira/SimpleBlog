@@ -1,7 +1,3 @@
-function AppButton({children}) {
-  return (
-    <button className="btn">{children}</button>
-  );
+export default function AppButton({ children }) {
+  return <button>{children}</button>;
 }
-
-export default AppButton;

@@ -1,3 +1,5 @@
+import { json, useLoaderData } from "react-router-dom";
+
 import { useNavigate } from "react-router-dom";
 import AppButton from "../components/atoms/Button";
 import AppLabel from "../components/atoms/Label";
@@ -7,8 +9,11 @@ import AppTextArea from "../components/atoms/TextArea";
 import "../css/forms.css";
 
 function CreatePost() {
+  const data = useLoaderData();
   const navigagte = useNavigate();
 
+  const authors = data.authors
+  
   function navigateHandler() {
     navigagte("/");
   }
@@ -43,15 +48,28 @@ function CreatePost() {
         <div className="form-control">
           <AppLabel htmlFor="author">Select Author</AppLabel>
           <select id="author" name="author">
-            {/* <% for(const author of authors) { %>
-            <option value="<%= author.id %>"><%= author.name %></option>
-            <% } %> */}
+            {authors.map((author) => (
+              <option key={author.id} defaultValue={author.id}>{author.name}</option>
+              ))}
           </select>
         </div>
-        <AppButton onClick={navigateHandler}>Add Post</AppButton>
+        <AppButton className="btn" onClick={navigateHandler}>Add Post</AppButton>
       </form>
     </main>
   );
 }
 
 export default CreatePost;
+
+export async function loader() {
+  const response = await fetch("http://localhost:8080/api/authors");
+
+  if (!response.ok) {
+    throw json(
+      { message: "Error on fetching all Posts." }, 
+      { status: 500 }
+    );
+  } else { 
+    return response;
+  }
+}

@@ -1,6 +1,9 @@
 import { Link } from "react-router-dom";
 
+import AppButton from "../atoms/Button";
+
 import '../../css/posts.css'
+import '../../css/forms.css'
 
 function PostItem({item}) {
   return (
@@ -10,7 +13,7 @@ function PostItem({item}) {
       <p>{item.summary}</p>
       <div className="post-actions">
         <form action="/posts/<%= post.post_id %>/delete" method="POST">
-          <button className="btn btn-alt">Delete Post</button>
+          <AppButton className="btn btn-alt">Delete Post</AppButton>
         </form>
         <Link to={`${item.post_id}/edit`}>Edit Post</Link>
         <Link className="btn" to={`${item.post_id}`}>
