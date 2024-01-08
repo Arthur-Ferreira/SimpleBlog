@@ -1,7 +1,5 @@
 import { Form, json, useLoaderData } from "react-router-dom";
 
-import AppButton from "../../components/atoms/Button";
-
 import "../../css/forms.css";
 
 function CreatePost() {

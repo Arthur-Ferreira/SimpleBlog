@@ -1,6 +1,4 @@
-import { useRouteLoaderData } from "react-router-dom";
-
-import AppButton from "../../components/atoms/Button";
+import { Form, useRouteLoaderData } from "react-router-dom";
 
 import "../../css/forms.css";
 
@@ -11,7 +9,7 @@ function UpdatePost() {
   return (
     <main>
       <h1>Update post</h1>
-      <form method="post">
+      <Form method="patch">
         <div className="form-control">
           <label htmlFor="title">Title</label>
           <input
@@ -43,8 +41,8 @@ function UpdatePost() {
             defaultValue={post ? post.body : ""}
           />
         </div>
-        <AppButton>Update Post</AppButton>
-      </form>
+        <button type="submit" className="btn">Update Post</button>
+      </Form>
     </main>
   );
 }

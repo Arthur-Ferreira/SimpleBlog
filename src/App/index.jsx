@@ -4,10 +4,12 @@ import Root from "./Root";
 import RootLayout from "./RootLayout";
 import Error from "./Error";
 import PostList, { loader as postsLoader } from "./PostList";
+import deletePostAction from "./PostList/action";
 import CreatePost, { loader as authorsLoader } from "./CreatePost";
 import newPostAction from "./CreatePost/action";
 import PostDetail, { loader as postDetailsLoader } from "./PostDetail";
 import UpdatePost from "./UpdatePost";
+import postUpdateAction from "./UpdatePost/action";
 
 import "../css/base.css";
 
@@ -21,14 +23,24 @@ const router = createBrowserRouter([
       {
         path: "posts",
         children: [
-          { index: true, loader: postsLoader, element: <PostList /> },
+          {
+            index: true,
+            element: <PostList />,
+            action: deletePostAction,
+            loader: postsLoader,
+          },
           {
             path: ":id",
             id: "post",
             loader: postDetailsLoader,
             children: [
               { index: true, element: <PostDetail /> },
-              { path: "edit", element: <UpdatePost /> },
+              {
+                path: "edit",
+                element: <UpdatePost />,
+                action: postUpdateAction,
+              },
+              { path: "delete", action: deletePostAction },
             ],
           },
         ],
