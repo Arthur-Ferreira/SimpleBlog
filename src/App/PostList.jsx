@@ -34,11 +34,8 @@ export async function loader() {
   const response = await fetch("http://localhost:8080/api/posts");
 
   if (!response.ok) {
-    throw json(
-      { message: "Error on fetching all Posts." }, 
-      { status: 500 }
-    );
-  } else { 
+    throw json({ message: "Error on fetching all Posts." }, { status: 500 });
+  } else {
     return response;
   }
 }

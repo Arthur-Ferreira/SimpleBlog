@@ -19,16 +19,17 @@ const router = createBrowserRouter([
       { index: true, element: <RootLayout /> },
       {
         path: "posts",
-        element: <PostList />,
-        loader: postsLoader,
-      },
-      {
-        path: "posts/:id",
-        id: "post",
-        loader: postDetailsLoader,
         children: [
-          { index: true, element: <PostDetail /> },
-          { path: ":id/edit", element: <UpdatePost /> },
+          { index: true, loader: postsLoader, element: <PostList /> },
+          {
+            path: ":id",
+            id: "post",
+            loader: postDetailsLoader,
+            children: [
+              { index: true, element: <PostDetail /> },
+              { path: "edit", element: <UpdatePost /> },
+            ],
+          },
         ],
       },
       { path: "new-post", element: <CreatePost />, loader: authorsLoader },
