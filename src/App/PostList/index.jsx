@@ -1,5 +1,5 @@
 import { Link, json, useLoaderData } from "react-router-dom";
-import PostItem from "../components/molecules/post-item";
+import PostItem from "../../components/molecules/post-item";
 
 function PostList() {
   const data = useLoaderData();

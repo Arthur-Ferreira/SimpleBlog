@@ -5,6 +5,7 @@ import RootLayout from "./RootLayout";
 import Error from "./Error";
 import PostList, { loader as postsLoader } from "./PostList";
 import CreatePost, { loader as authorsLoader } from "./CreatePost";
+import newPostAction from "./CreatePost/action";
 import PostDetail, { loader as postDetailsLoader } from "./PostDetail";
 import UpdatePost from "./UpdatePost";
 
@@ -32,7 +33,12 @@ const router = createBrowserRouter([
           },
         ],
       },
-      { path: "new-post", element: <CreatePost />, loader: authorsLoader },
+      {
+        path: "new-post",
+        element: <CreatePost />,
+        action: newPostAction,
+        loader: authorsLoader,
+      },
     ],
   },
 ]);

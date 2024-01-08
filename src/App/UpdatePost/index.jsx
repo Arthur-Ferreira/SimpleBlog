@@ -1,8 +1,8 @@
 import { useRouteLoaderData } from "react-router-dom";
 
-import AppButton from "../components/atoms/Button";
+import AppButton from "../../components/atoms/Button";
 
-import "../css/forms.css";
+import "../../css/forms.css";
 
 function UpdatePost() {
   const data = useRouteLoaderData("post");
@@ -11,7 +11,7 @@ function UpdatePost() {
   return (
     <main>
       <h1>Update post</h1>
-      <form action="/posts/<%= post.post_id %>/edit" method="POST">
+      <form method="post">
         <div className="form-control">
           <label htmlFor="title">Title</label>
           <input

@@ -1,4 +1,4 @@
-import { Link, json, useRouteLoaderData } from "react-router-dom";
+import { Link, useRouteLoaderData } from "react-router-dom";
 
 function PostDetail() {
   const data = useRouteLoaderData("post");
@@ -9,8 +9,8 @@ function PostDetail() {
       <h1>{post.title}</h1>
       <section id="post-meta">
         <address>
-          <Link target="_blank" to={`mailto:${post.author_email}`}>
-            {post.author_name}
+          <Link target="_blank" to={`mailto:${post.author.email}`}>
+            {post.author.name}
           </Link>
         </address>{" "}
         |<time dateTime={post.date}>{post.humanReadableDate}</time>
@@ -25,8 +25,9 @@ function PostDetail() {
 
 export default PostDetail;
 
-export async function loader({ request, params }) {
+export async function loader({request, params}) {
   const id = params.id;
+
   const response = await fetch(`http://localhost:8080/api/posts/${id}`);
 
   if (!response.ok) {
