@@ -31,7 +31,8 @@ function PostList() {
 export default PostList;
 
 export async function loader() {
-  const response = await fetch("http://localhost:8080/api/posts");
+  let url = "http://simpleblogapi-production.up.railway.app/api"
+  const response = await fetch(`${url}/posts`);
 
   if (!response.ok) {
     throw json({ message: "Error on fetching all Posts." }, { status: 500 });

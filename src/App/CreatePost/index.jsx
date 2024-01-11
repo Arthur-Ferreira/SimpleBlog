@@ -47,7 +47,8 @@ function CreatePost() {
 export default CreatePost;
 
 export async function loader() {
-  const response = await fetch("http://localhost:8080/api/authors");
+  const url = "http://simpleblogapi-production.up.railway.app/api"
+  const response = await fetch(`${url}/authors`);
 
   if (!response.ok) {
     throw json({ message: "Error on fetching all Posts." }, { status: 500 });

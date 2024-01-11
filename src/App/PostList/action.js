@@ -2,9 +2,11 @@ import { json } from "react-router-dom";
 
 export default async function deletePostAction({ request, params }) {
   const id = params.id;
+  const url = "http://simpleblogapi-production.up.railway.app/api"
 
-  const response = await fetch(`http://localhost:8080/api/posts/${id}/delete`, {
+  const response = await fetch(`${url}/posts/${id}/delete`, {
     method: request.method,
+    mode: "cors",
   });
 
   if (!response.ok) {

@@ -3,6 +3,7 @@ import { json, redirect } from "react-router-dom";
 export default async function postUpdateAction({ request, params }) {
   const data = await request.formData();
   const id = params.id;
+  const url = "http://simpleblogapi-production.up.railway.app/api"
 
   const postData = {
     title: data.get("title"),
@@ -11,9 +12,10 @@ export default async function postUpdateAction({ request, params }) {
     author: data.get("author"),
   };
 
-  const response = await fetch(`http://localhost:8080/api/posts/${id}/edit`,
+  const response = await fetch(`${url}/posts/${id}/edit`,
     {
-      method: "PATCH",
+      method: "PATCH", 
+      mode: "cors",
       headers: {
         "Content-Type": "application/json",
       },
