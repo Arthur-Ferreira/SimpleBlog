@@ -1,0 +1,41 @@
+import { Form } from "react-router-dom";
+
+function CreatePostForm(authors) {
+  return (
+    <Form method="post">
+      <div className="form-control">
+        <label htmlFor="title">Title</label>
+        <input type="text" id="title" name="title" required />
+      </div>
+      <div className="form-control">
+        <label htmlFor="summary">Summary</label>
+        <input
+          type="text"
+          id="summary"
+          name="summary"
+          maxLength="255"
+          required
+        />
+      </div>
+      <div className="form-control">
+        <label htmlFor="content">Post Content</label>
+        <textarea id="content" name="content" required rows="5" />
+      </div>
+      <div className="form-control">
+        <label htmlFor="author">Select Author</label>
+        <select id="author" name="author">
+          {authors.map((author) => (
+            <option key={author.name} value={author.id}>
+              {author.name}
+            </option>
+          ))}
+        </select>
+      </div>
+      <button type="submit" className="btn">
+        Add Post
+      </button>
+    </Form>
+  );
+}
+
+export default CreatePostForm;

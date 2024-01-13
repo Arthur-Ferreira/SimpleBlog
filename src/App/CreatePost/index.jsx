@@ -1,7 +1,5 @@
 import { Form, useLoaderData } from "react-router-dom";
 
-import "../../css/forms.css";
-
 function CreatePost() {
   const data = useLoaderData();
   const authors = data.authors;

@@ -1,0 +1,12 @@
+:root {
+  /* Colors */
+  --text: #312d2c;
+  --brown: #754A35;
+  --white: #fff;
+  --white-light: #EFE7DD;
+  --yellow: #ffd900;
+  --yellow-dark: #C88A36;
+
+  /* Fonts */
+  --base-font-family: "Roboto Slab", serif;
+}

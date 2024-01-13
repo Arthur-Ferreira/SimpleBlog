@@ -3,15 +3,13 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Root from "./Root";
 import RootLayout from "./RootLayout";
 import Error from "./Error";
-import PostList, { loader as postsLoader } from "./PostList";
-import CreatePost  from "./CreatePost";
-import PostDetail, { loader as postDetailsLoader } from "./PostDetail";
+import PostList from "./PostList";
+import CreatePost from "./CreatePost";
+import PostDetail from "./PostDetail";
 import UpdatePost from "./UpdatePost";
 
 import appActions from "../utils/actions";
 import appLoaders from "../utils/loaders";
-
-import "../css/base.css";
 
 const router = createBrowserRouter([
   {

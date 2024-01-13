@@ -1,11 +1,12 @@
-import { NavLink, Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
-function Header() {
+import AppLogo from "../../atoms/Logo";
+import Header from "./Header";
+
+function AppHeader() {
   return (
-    <header id="main-header">
-      <div id="logo">
-        <Link to="/">MyBlog</Link>
-      </div>
+    <Header>
+      <AppLogo />
       <nav>
         <ul>
           <li>
@@ -18,8 +19,8 @@ function Header() {
           </li>
         </ul>
       </nav>
-    </header>
+    </Header>
   );
 }
 
-export default Header;
+export default AppHeader;

@@ -23,10 +23,11 @@ form input,
 form textarea {
   width: 100%;
 }
-form input:focus, form input:focus,
+form input:focus,
+form input:focus,
 form textarea:focus,
 form textarea:focus {
-  background-color: #EFE7DD;
+  background-color: #efe7dd;
 }
 form .form-control {
   margin: 0.5rem 0;

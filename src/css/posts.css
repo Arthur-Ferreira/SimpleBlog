@@ -12,15 +12,18 @@
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
   border-radius: 8px;
   padding: 1rem;
-  background-color: #D8A790;
+  background-color: #d8a790;
 }
+
 .post-item form {
   margin: 0;
 }
+
 .post-item h2,
 .post-item p {
   margin: 0.5rem 0;
 }
+
 .post-item .post-item-author {
   font-style: italic;
 }
@@ -31,6 +34,7 @@
   align-items: center;
   gap: 1rem;
 }
+
 .post-actions .btn-alt {
   padding: 0;
 }
@@ -39,9 +43,11 @@
 #post-meta {
   color: #cccccc;
 }
+
 #post-meta address {
   display: inline;
 }
+
 #post-meta time {
   font-style: italic;
 }

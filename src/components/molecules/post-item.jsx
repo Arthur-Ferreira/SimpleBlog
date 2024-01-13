@@ -7,7 +7,7 @@ function PostItem({ item }) {
   const submit = useSubmit();
   const navigate = useNavigate();
 
-  function deleteHandler() {
+  function deleteHandler(item) {
     const proceed = window.confirm(
       `Do you really want to Delete post: ${item.title}?`
     );
@@ -24,7 +24,7 @@ function PostItem({ item }) {
       <p className="post-item-author">{item.author_name}</p>
       <p>{item.summary}</p>
       <div className="post-actions">
-        <button onClick={deleteHandler} className="btn btn-alt">
+        <button onClick={() => deleteHandler(item)} className="btn btn-alt">
           Delete Post
         </button>
         <Link to={`${item.post_id}/edit`}>Edit Post</Link>
