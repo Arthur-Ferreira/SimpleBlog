@@ -4,12 +4,12 @@ import Root from "./Root";
 import RootLayout from "./RootLayout";
 import Error from "./Error";
 import PostList, { loader as postsLoader } from "./PostList";
-import deletePostAction from "./PostList/action";
-import CreatePost, { loader as authorsLoader } from "./CreatePost";
-import newPostAction from "./CreatePost/action";
+import CreatePost  from "./CreatePost";
 import PostDetail, { loader as postDetailsLoader } from "./PostDetail";
 import UpdatePost from "./UpdatePost";
-import postUpdateAction from "./UpdatePost/action";
+
+import appActions from "../utils/actions";
+import appLoaders from "../utils/loaders";
 
 import "../css/base.css";
 
@@ -26,21 +26,21 @@ const router = createBrowserRouter([
           {
             index: true,
             element: <PostList />,
-            action: deletePostAction,
-            loader: postsLoader,
+            action: appActions.deletePostAction,
+            loader: appLoaders.postsLoader,
           },
           {
             path: ":id",
             id: "post",
-            loader: postDetailsLoader,
+            loader: appLoaders.postDetailsLoader,
             children: [
               { index: true, element: <PostDetail /> },
               {
                 path: "edit",
                 element: <UpdatePost />,
-                action: postUpdateAction,
+                action: appActions.updatePostAction,
               },
-              { path: "delete", action: deletePostAction },
+              { path: "delete", action: appActions.deletePostAction },
             ],
           },
         ],
@@ -48,8 +48,8 @@ const router = createBrowserRouter([
       {
         path: "new-post",
         element: <CreatePost />,
-        action: newPostAction,
-        loader: authorsLoader,
+        action: appActions.newPostAction,
+        loader: appLoaders.authorsLoader,
       },
     ],
   },

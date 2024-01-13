@@ -1,4 +1,4 @@
-import { Form, json, useLoaderData } from "react-router-dom";
+import { Form, useLoaderData } from "react-router-dom";
 
 import "../../css/forms.css";
 
@@ -38,22 +38,12 @@ function CreatePost() {
             ))}
           </select>
         </div>
-        <button type="submit" className="btn">Add Post</button>
+        <button type="submit" className="btn">
+          Add Post
+        </button>
       </Form>
     </main>
   );
 }
 
 export default CreatePost;
-
-export async function loader() {
-  const url = "http://simpleblogapi-production.up.railway.app/api"
-  const response = await fetch(`${url}/authors`);
-
-  if (!response.ok) {
-    throw json({ message: "Error on fetching all Posts." }, { status: 500 });
-  } else {
-    return response;
-  }
-}
-

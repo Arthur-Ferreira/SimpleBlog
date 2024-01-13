@@ -1,4 +1,4 @@
-import { Link, json, useLoaderData } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
 import PostItem from "../../components/molecules/post-item";
 
 function PostList() {
@@ -29,14 +29,3 @@ function PostList() {
 }
 
 export default PostList;
-
-export async function loader() {
-  let url = "http://simpleblogapi-production.up.railway.app/api"
-  const response = await fetch(`${url}/posts`);
-
-  if (!response.ok) {
-    throw json({ message: "Error on fetching all Posts." }, { status: 500 });
-  } else {
-    return response;
-  }
-}
