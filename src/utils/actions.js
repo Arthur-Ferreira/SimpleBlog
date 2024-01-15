@@ -1,4 +1,5 @@
 import { json, redirect } from "react-router-dom";
+
 async function newPostAction({ request, params }) {
   const data = await request.formData();
   const url = "https://simpleblogapi-production.up.railway.app/api"

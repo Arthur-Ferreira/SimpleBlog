@@ -1,7 +1,7 @@
 import { json } from "react-router-dom";
 
 export async function postsLoader() {
-  let url = "http://simpleblogapi-production.up.railway.app/api"
+  let url = "https://simpleblogapi-production.up.railway.app/api"
   const response = await fetch(`${url}/posts`);
 
   if (!response.ok) {
@@ -12,7 +12,7 @@ export async function postsLoader() {
 }
 
 async function authorsLoader() {
-  const url = "http://simpleblogapi-production.up.railway.app/api";
+  const url = "https://simpleblogapi-production.up.railway.app/api";
   const response = await fetch(`${url}/authors`);
 
   if (!response.ok) {
@@ -25,7 +25,7 @@ async function authorsLoader() {
 
 export async function postDetailsLoader({request, params}) {
   const id = params.id;
-  const url = "http://simpleblogapi-production.up.railway.app/api"
+  const url = "https://simpleblogapi-production.up.railway.app/api"
   const response = await fetch(`${url}/posts/${id}`);
 
   if (!response.ok) {
