@@ -24,10 +24,10 @@ function PostItem({ item }) {
       <p className="post-item-author">{item.author_name}</p>
       <p>{item.summary}</p>
       <div className="post-actions">
-        <button onClick={() => deleteHandler(item)} className="btn btn-alt">
+        <button onClick={() => deleteHandler(item)} className="btn --alt">
           Delete Post
         </button>
-        <Link to={`${item.post_id}/edit`}>Edit Post</Link>
+        <Link className="btn --alt" to={`${item.post_id}/edit`}>Edit Post</Link>
         <Link className="btn" to={`${item.post_id}`}>
           View Post
         </Link>

@@ -1,6 +1,8 @@
+import React from "react";
 import { NavLink } from "react-router-dom";
 
 import AppLogo from "../../atoms/Logo";
+import UList from "../../atoms/Ul";
 import Header from "./Header";
 
 function AppHeader() {
@@ -8,7 +10,7 @@ function AppHeader() {
     <Header>
       <AppLogo />
       <nav>
-        <ul>
+        <UList>
           <li>
             <NavLink to="/posts" end>
               All Posts
@@ -17,7 +19,7 @@ function AppHeader() {
           <li>
             <NavLink to="/new-post">Create Post</NavLink>
           </li>
-        </ul>
+        </UList>
       </nav>
     </Header>
   );

@@ -16,7 +16,7 @@ export default function PostActions() {
   }
   return (
     <div className="post-actions">
-      <button onClick={deleteHandler} className="btn btn-alt">
+      <button onClick={deleteHandler} className="btn --alt">
         Delete Post
       </button>
       <Link to={`${item.post_id}/edit`}>Edit Post</Link>
